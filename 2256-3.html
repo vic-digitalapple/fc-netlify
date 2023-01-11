@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+<div id="chart-container">FusionCharts will render here</div>
+</head>
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script>new FusionCharts({
+    type: "radialbar",
+    width: "1000",
+    height: "400",
+    renderAt: "chart-container",
+    dataSource: {
+      chart: {
+        theme: "zune",
+        caption: "Company's share % raised in Last 5 years",
+        showLegend: 0,
+        innerRadius: 20,
+        outerRadius: 100,
+        showLabels: 1,
+        labelText: "<b>$label</b>"
+      },
+      data: [
+        {
+          label: "ITC",
+          value: 66,
+          color : "#4dff00"
+        },
+        {
+          label: "Tata Power",
+          value: 90,
+          color : "#ff00d9"
+        },
+        {
+          label: "JSW steels",
+          value: 85,
+          color : "#ff9d00"
+        },
+        {
+          label : "Canara Bank",
+          value : 80,
+          color : "#1f2a66"
+        }
+      ]
+      
+    },
+    events:{
+        "dataplotclick":(e)=>{
+        console.log("clicked");
+        },
+        "dataplotrollover":(e)=>{
+        console.log("roll over");
+        }
+        }
+  }).render();
+</script>
+</html>
