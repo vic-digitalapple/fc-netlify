@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/resources/css/ext-all.css"  type="text/css">
+    <script language="javascript" type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/adapter/ext/ext-base.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/ext-all.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+    <div id="chart-container">FusionCharts will render here</div>
+</head>
+
+<body>
+    <div id="salesChart">FusionCharts will render here</div>
+</body>
+<script>    FusionCharts.ready(function () {
+
+        var salesChart;
+
+        salesChart = new FusionCharts({
+            type: "angulargauge",
+            width: "100%",
+            height: "400",
+            dataFormat: "json",
+            dataSource: {
+                "chart": {
+                    "caption": "Customer Satisfaction Score",
+                    "subcaption": "Last week",
+                    "lowerLimit": "0",
+                    "upperLimit": "100",
+                    "theme": "fusion"
+                },
+                "colorRange": {
+                    "color": [{
+                        "minValue": "0",
+                        "maxValue": "50",
+                        "code": "#e44a00"
+                    }, {
+                        "minValue": "50",
+                        "maxValue": "75",
+                        "code": "#f8bd19"
+                    }, {
+                        "minValue": "75",
+                        "maxValue": "100",
+                        "code": "#6baa01"
+                    }]
+                },
+                "dials": {
+                    "dial": [{
+                        "value": "67"
+                    }]
+                }
+            }
+        });
+
+
+        // Using Sencha ext3.4 creating a viewport frame and a panel, render chart in panel
+        // when panel div size changes fusion charts no longer recognizes the change in 3.17.0
+        new Ext.Viewport({
+            layout: 'fit',
+            items: [{
+                xtype: 'panel',
+                title: 'Chart Test',
+                bodyStyle: 'border: 1px solid red', // so you can see the container size
+                listeners: {
+                    // After Ext panel has rendered, render the Fusion Chart in the div (via the id)
+                    afterrender: function (p) {
+
+                        salesChart.render(p.body.id);
+
+                    }
+                }
+            }]
+        });
+
+
+
+    });</script>
+
+</html>

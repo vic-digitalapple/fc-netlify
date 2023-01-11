@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+<div id="chart-container">FusionCharts will render here</div>
+</head>
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script>FusionCharts.ready(function() {
+    const dataSetFull = [{
+      "seriesname": "Food Products",
+      "data": [{
+          "value": "140000"
+        },
+        {
+          "value": "565000"
+        },
+        {
+          "value": "819000"
+        },
+        {
+          "value": "654100"
+        }
+      ]
+    },
+    {
+      "seriesname": "Non-Food Products",
+      "data": [{
+          "value": "321500"
+        },
+        {
+          "value": "451000"
+        },
+        {
+          "value": "561200"
+        },
+        {
+          "value": "742800"
+        }
+      ]
+    },
+    {
+      "seriesname": "Products 1",
+      "data": [{
+          "value": "242500"
+        },
+        {
+          "value": "753200"
+        },
+        {
+          "value": "691000"
+        },
+        {
+          "value": "631200"
+        }
+      ]
+    },
+    {
+      "seriesname": "Products 2",
+      "data": [{
+          "value": "561000"
+        },
+        {
+          "value": "752100"
+        },
+        {
+          "value": "485400"
+        },
+        {
+          "value": "452200"
+        }
+      ]
+    }
+  ];
+  
+const dataSetSmall = [
+{
+      "seriesname": "Products 2",
+      "data": [{
+          "value": "351400"
+        },
+        {
+          "value": "741100"
+        },
+        {
+          "value": "522000"
+        },
+        {
+          "value": "770800"
+        }
+      ]
+    }
+];
+
+const dataSource = {
+  "chart": {
+    "theme": "fusion",
+    "caption": "Profit snap of  products ",
+    "subCaption": "For current year",
+    "xAxisname": "Quarter",
+    "yAxisName": "Profit (In USD)",
+    //Showing the Cumulative Sum of stacked data
+    "showSum": "1",
+    "numberPrefix": "$",
+    "theme": "fusion"
+  },
+  "categories": [{
+    "category": [{
+        "label": "Q1"
+      },
+      {
+        "label": "Q2"
+      },
+      {
+        "label": "Q3"
+      },
+      {
+        "label": "Q4"
+      }
+    ]
+  }],
+  "dataset": dataSetFull
+};
+
+var revenueChart = new FusionCharts({
+type: 'stackedcolumn2dline',
+renderAt: 'chart-container',
+width: '700',
+height: '400',
+dataFormat: 'json',
+dataSource
+}).render();
+
+const btn = document.createElement('button');
+btn.id = 'btn';
+btn.innerText = 'Button';
+
+let fullData = true;
+
+document.body.insertBefore(btn, document.body.firstElementChild);
+
+btn.onclick = () => {
+  setTimeout(() => {
+    if (fullData) {
+        revenueChart.setChartData({...dataSource, dataset: dataSetSmall});
+    } else {
+        revenueChart.setChartData({...dataSource, dataset: dataSetFull});
+  }
+  
+  fullData = !fullData;
+}, 1000);
+}
+});</script>
+</html>

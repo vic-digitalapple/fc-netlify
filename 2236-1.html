@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+<div id="chart-container">FusionCharts will render here</div>
+</head>
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script> const data = [
+    ["31-Mar-11", 50],
+    ["31-Mar-12", 55],
+    ["31-Mar-13", 60],
+    ["31-Mar-14", 55],
+    ["31-Mar-15", 50],
+    ["31-Mar-16", 55],
+    ["31-Mar-17", 68],
+    ["31-Mar-18", 73],
+    ["31-Mar-19", 77]
+  ];
+  const schema = [
+    {
+      name: "Time",
+      type: "date",
+      format: "%d-%b-%y"
+    },
+    {
+      name: "Fuel Prices",
+      type: "number"
+    }
+  ];
+  const dataStore = new FusionCharts.DataStore();
+  dataStore.createDataTable(data, schema);
+  
+  const dataSource = {
+    chart: {
+      theme: "candy"
+    },
+    caption: {
+      text: "Fuel Prices from 2011-2019"
+    },
+    subcaption: {
+      text: "Price Per Litre"
+    },
+    yaxis: [
+      {
+        plot: {
+          value: "Fuel Prices"
+        },
+        format: {
+          prefix: "Rs."
+        },
+        title: "Fuel Prices",
+        
+      }
+    ],
+    xaxis: {
+      initialInterval: {
+        from: "31-Mar-11",
+        to: "31-Mar-19"
+      }
+    }
+  };
+  
+  const handleChartLoaded = (eventObj) => {
+    const chartObj = eventObj.sender;
+    dataStore.appendRows([
+      ["31-Mar-13", 42],
+      ["31-Mar-15", 69],
+      ["31-Mar-18", 56]
+    ]);
+    chartObj.setChartData({
+      ...dataSource,
+      data: dataStore.getDataTable()
+    });
+  };
+  
+  FusionCharts.ready(() => {
+    const chart = new FusionCharts({
+      type: "timeseries",
+      renderAt: "chart-container",
+      width: "100%",
+      height: "400",
+      dataSource: dataSource,
+      events: {
+        loaded: handleChartLoaded
+      }
+    });
+    chart.render();
+  });
+  </script>
+</html>

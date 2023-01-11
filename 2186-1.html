@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+    <div id="chart-container">FusionCharts will render here</div>
+</head>
+
+<body>
+    <div id="container">FusionCharts will render here</div>
+</body>
+<script>
+    const jsonify = res => res.json();
+    const dataFetch = Promise.resolve([
+        [
+            1622419200000,
+            "Diesel",
+            60
+        ],
+        [
+            1622419200000,
+            "Petrol",
+            65
+        ],
+        [
+            1625097600000,
+            "Diesel",
+            70
+        ],
+        [
+            1625097600000,
+            "Petrol",
+            75
+        ],
+        [
+            1627689600000,
+            "Diesel",
+            80
+        ],
+        [
+            1627689600000,
+            "Petrol",
+            85
+        ],
+        [
+            1630368000000,
+            "Diesel",
+            90
+        ],
+        [
+            1630368000000,
+            "Petrol",
+            95
+        ],
+    ])
+    const schemaFetch = Promise.resolve([
+        {
+            "name": "Time",
+            "type": "date",
+            "format": "%Q"
+        },
+        {
+            "name": "CostType",
+            "type": "string"
+        },
+        {
+            "name": "Cost",
+            "type": "number"
+        }
+    ])
+
+    Promise.all([dataFetch, schemaFetch]).then(([data, schema]) => {
+        var fusionTable = new FusionCharts.DataStore().createDataTable(data, schema);
+        new FusionCharts({
+            type: 'timeseries',
+            renderAt: 'container',
+            width: "100%",
+            height: 490,
+            dataSource: {
+                data: fusionTable,
+                chart: {
+                    paletteColors: ['#b4c92a', '#2e399e'],
+                    exportEnabled: 1
+                },
+                caption: {
+                    text: 'Petrol and Diesel Prices per Litre'
+                },
+                series: 'CostType',
+                yAxis: {
+                    "aggregation": "Last",
+                    "plot": {
+                        "value": "Cost",
+                        "type": "area",
+                        "style": {
+                            "plot": {
+                                "fill-opacity": "1.0"
+                            }
+                        }
+                    },
+                    format: {
+                        prefix: "Rs."
+                    }
+                },
+                xAxis: {
+                    binning: {
+                        "year": [],
+                        "month": [1],
+                        "day": [1]
+                    }
+                },
+                tooltip: {
+                    outputtimeformat: {
+                        year: '%b %-d, %Y, %-I%p',
+                        month: '%b %-d, %Y, %-I%p',
+                        day: '%b %-d, %Y, %-I%p',
+                        hour: '%b %-d, %Y, %-I%p',
+                        minute: '%b %-d, %Y, %-I%p',
+                    }
+                }
+            }
+        }).render();
+
+    });</script>
+
+</html>

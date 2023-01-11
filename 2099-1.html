@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+    <div id="chart-container">FusionCharts will render here</div>
+</head>
+
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script> FusionCharts.ready(function () {
+        var revenueChart = new FusionCharts({
+            type: 'doughnut2d',
+            renderAt: 'chart-container',
+            width: '100%',
+            height: '400',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "Hew of Credits by Product Categories",
+                    "subCaption": "Last year",
+                    "numberPrefix": "$",
+                    "startingAngle": "310",
+                    "defaultCenterLabel": "Total Credits: $102.08K",
+                    "centerLabel": "Revenue from $label: $value",
+                    "centerLabelBold": "1",
+                    "showTooltip": "0",
+                    "showLabels": "0",
+                    "legendPosition": "right",
+                    "theme": "fusion"
+                },
+                "data": [{
+                    "label": "16504 Food Items in 2020",
+                    "value": "16504"
+                },
+                {
+                    "label": "30633 Apparels Items in 2020",
+                    "value": "30633"
+                },
+                {
+                    "label": "18507 Electronics Items in 2020",
+                    "value": "18507"
+                },
+                {
+                    "label": "810 Household Items in 2020",
+                    "value": "36910"
+                }
+                ]
+            }
+        }).render();
+    });
+</script>
+
+</html>

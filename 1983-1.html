@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+    <div id="chart-container">FusionCharts will render here</div>
+</head>
+
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script>FusionCharts.ready(function () {
+        var revenueChart = new FusionCharts({
+            type: 'spline',
+            renderAt: 'chart-container',
+            width: '400',
+            height: '300',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "Total impressions in Bakersfield Central",
+                    "subCaption": "Last week",
+                    "xAxisName": "Day",
+                    "yAxisName": "No. of Travellers",
+                    "showValues": "1",
+                    "theme": "fusion"
+                },
+                "annotations": {
+                    "origw": "400",
+                    "origh": "300",
+                    "autoscale": "1"
+
+                },
+                "data": [{
+                    "label": "Mon",
+                    "value": "25123"
+                }, {
+                    "label": "Tue",
+                    "value": "11233"
+                }, {
+                    "label": "Wed",
+                    "value": "20507"
+                }, {
+                    "label": "Thu",
+                    "value": "10110"
+                }, {
+                    "label": "Fri",
+                    "value": "28529"
+                }, {
+                    "label": "Sat",
+                    "value": "13803"
+                }, {
+                    "label": "Sun",
+                    "value": "5202"
+                }]
+            },
+            events: {
+                "beforeRender": function (evt, args) {
+                    var chartRef = evt.sender,
+                        createGroupItems = function () {
+                            var annotations = chartRef.annotations;
+
+                            // Adding a group, "totalFootfall"
+                            annotations.addGroup({
+                                'id': 'totalFootfall'
+                            });
+
+                            //Adding rectangle annotation item to the annotation group
+                            annotations.addItem('totalFootfall', {
+                                "id": "dyn-labelBG",
+                                "type": "rectangle",
+                                "radius": "3",
+                                "x": "$canvasEndX - 100",
+                                "y": "$canvasStartY",
+                                "tox": "$canvasEndX",
+                                "toy": "$canvasStartY + 30",
+                                "color": "#a24bfa",
+                                "alpha": "70"
+                            }, true);
+
+                            // Adding text annotation item to the annotation group
+                            annotations.addItem('totalFootfall', {
+                                "id": "dyn-label",
+                                "type": "text",
+                                "text": "Total: 119,507",
+                                "fillcolor": "#a24bfa",
+                                "fontsize": "10",
+                                "x": "$canvasEndX - 50",
+                                "y": "$canvasStartY + 15"
+                            }, true);
+
+                        },
+
+                        //Code for adding the annotation-Start
+                        controls = document.createElement('div');
+                    controls.innerHTML = '<input type="button" id = "add_annotation" value = "Show Impressions"></input> &nbsp;</input> &nbsp; <input type="button" id="destroy_annotation" value="Hide Impression" disabled="true"><br> <br><input type="button" id ="update_annotation" value="Change Color" disabled="true"></input>';
+                    controls.style.cssText = 'width:400px; text-align: center; font-size:12px;';
+
+                    // Append controls to document
+                    args.container.appendChild(controls);
+                    document.getElementById('add_annotation').onclick = function () {
+                        createGroupItems();
+                        document.getElementById('update_annotation').disabled = false;
+                        document.getElementById('destroy_annotation').disabled = false;
+                        document.getElementById('add_annotation').disabled = true;
+                    };
+                    //Code for adding the annotation-End
+
+                    //Code for showing/hiding the annotation-Start
+
+
+
+                    //Code for changing the color of the rectangle annotation - Start
+                    document.getElementById('update_annotation').onclick = function () {
+                        var annotations = evt.sender.annotations;
+                        annotations.update('dyn-labelBG', {
+                            "fillColor": "#a24bfa"
+                        });
+                    }
+
+                    //Code for changing the color of the rectangle annotation - End
+
+                    document.getElementById('destroy_annotation').onclick = function () {
+                        var annotations = evt.sender.annotations;
+                        annotations.destroy('totalFootfall');
+                        document.getElementById('add_annotation').disabled = false;
+                        document.getElementById('update_annotation').disabled = true;
+                        document.getElementById('destroy_annotation').disabled = true;
+                    }
+                }
+            }
+        }).render();
+    });</script>
+
+</html>

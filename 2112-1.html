@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+<div id="chart-container">FusionCharts will render here</div>
+</head>
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script> FusionCharts.ready(function() {
+    var oxygenVolume = 110,
+      oxygenWidget = new FusionCharts({
+        type: 'cylinder',
+        dataFormat: 'json',
+        id: 'oxygenMeter-1',
+        renderAt: 'chart-container',
+        width: '450',
+        height: '450',
+        dataSource: {
+          "chart": {
+            "theme": "gammel",
+            "caption": "Oxygen Level in Cyliender",
+            "subcaption": "Central Hospital",
+            "lowerLimit": "10",
+            "upperLimit": "200",
+            "lowerLimitDisplay": "Almost Empty",
+            "upperLimitDisplay": "Full",
+            "numberSuffix": " ltrs",
+            "showValue": "0",
+            "chartBottomMargin": "35",
+            cylfillcolor: '#26524a'
+          },
+          "value": "180",
+        },
+        "events": {
+          "rendered": function(evtObj, argObj) {
+            var oxygenVolume = 180,
+              gaugeRef = evtObj.sender,
+              color = '#666ae8';
+            gaugeRef.chartInterval = setInterval(function() {
+  
+              (oxygenVolume < 10) ? (oxygenVolume = 110) : "";
+              var consVolume = oxygenVolume - (Math.floor(Math.random() * 3));
+              var strData = "&color=" + color + "&value=" + consVolume;
+              gaugeRef.feedData(strData);
+              oxygenVolume = consVolume;
+            }, 1000);
+          },
+          "disposed": function(evt, arg) {
+            clearInterval(evt.sender.chartInterval);
+          }
+        }
+      }).render();
+  });</script>
+</html>

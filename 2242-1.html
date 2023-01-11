@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+    <div id="chart-container">FusionCharts will render here</div>
+</head>
+
+<body>
+    <div id="container">FusionCharts will render here</div>
+</body>
+<script> const jsonify = res => res.json();
+    const dataFetch = [["15-08-2016 12:00", "Sales", "102"], ["15-08-2016 12:30", "Sales", "110"], ["15-08-2016 13:00", "Sales", "125"], ["15-08-2016 13:30", "Sales", "130"], ["15-08-2016 14:00", "Sales", "120"], ["15-08-2016 14:30", "Sales", "110"], ["15-08-2016 15:00", "Sales", "100"], ["15-08-2016 15:30", "Sales", "95"], ["15-08-2016 16:00", "Sales", "80"], ["15-08-2016 16:30", "Sales", "100"], ["15-08-2016 17:00", "Sales", "90"], ["15-08-2016 17:30", "Sales", "50"], ["15-08-2016 18:00", "Sales", "75"], ["15-08-2016 18:30", "Sales", "90"], ["15-08-2016 19:00", "Sales", "40"], ["15-08-2016 19:30", "Sales", "85"], ["15-08-2016 20:00", "Sales", "100"], ["15-08-2016 20:30", "Sales", "130"]];
+    const schemaFetch = [{ "name": "Time", "type": "date", "format": "%d-%m-%Y %H:%M" }, { "name": "Type", "type": "string" }, { "name": "Sales Analysis", "type": "number" }];
+
+    Promise.all([dataFetch, schemaFetch]).then(([data, schema]) => {
+        var fusionTable = new FusionCharts.DataStore().createDataTable(data, schema);
+
+        new FusionCharts({
+            type: 'timeseries',
+            renderAt: 'container',
+            width: "90%",
+            height: 490,
+            dataSource: {
+                data: fusionTable,
+                chart: {
+                    exportEnabled: 1,
+                    paletteColor: ['#65805d'],
+                    theme: 'candy'
+                },
+                caption: {
+                    text: 'Sales Analysis'
+                },
+                subcaption: {
+                    text: 'In 2016'
+                },
+                "xaxis": {
+                    "plot": "Time",
+                    "outputTimeFormat": {
+                        "minute": "%H:%M",
+                        "hour": "%H:%M",
+                    },
+                },
+                yAxis: {
+                    "plot": {
+                        "value": "Sales",
+                        "type": "line"
+                    },
+                },
+                "tooltip": {
+                    "enabled": "false", // Disables the Tooltip
+                    "outputTimeFormat": {
+                        "minute": "%d-%m-%Y %H:%M"
+                    },
+                },
+                "navigator": {
+                    "outputTimeFormat": "%b %d, %Y %H:%M",
+                    HourTimeFormat: 24
+                }
+            }
+        }).render();
+
+    });</script>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2256 - 1</title>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/3.20.0/fusioncharts.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+    <div id="chart-container">FusionCharts will render here</div>
+</head>
+
+<body>
+    <div id="chart-container">FusionCharts will render here</div>
+</body>
+<script>FusionCharts.ready(function () {
+        var salesMap = new FusionCharts({
+            type: 'column2d',
+            renderAt: 'chart-container',
+            width: '600',
+            height: '400',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "theme": "fusion",
+                    "baseFont": "Merienda",
+                    "baseFontSize": "11",
+                    "baseFontColor": "#0066cc",
+                    "caption": "Statewise & Transaction",
+                    "subcaption": "Last year",
+                    "borderColor": "#DDDDDDD",
+                    "showLabels": "1",
+                    "exportEnabled": "1",
+                    "numberScaleValue": "1,1000,1000",
+                    "numberScaleUnit": "K,M,B",
+                    "numberPrefix": "$",
+                },
+                "data": [{
+                    "label": "Jan",
+                    "value": "850000"
+                },
+                {
+                    "label": "Feb",
+                    "value": "250000"
+                },
+                {
+                    "label": "Mar",
+                    "value": "450000"
+                },
+                {
+                    "label": "Apr",
+                    "value": "460000"
+                },
+                {
+                    "label": "May",
+                    "value": "250000"
+                },
+                {
+                    "label": "Jun",
+                    "value": "520000"
+                },
+                {
+                    "label": "Jul",
+                    "value": "340000"
+                },
+                {
+                    "label": "Aug",
+                    "value": "150000"
+                },
+                {
+                    "label": "Sep",
+                    "value": "260000"
+                },
+                {
+                    "label": "Oct",
+                    "value": "860000"
+                },
+                {
+                    "label": "Nov",
+                    "value": "300000"
+                },
+                {
+                    "label": "Dec",
+                    "value": "450000"
+                }
+                ],
+                "trendlines": [{
+                    "line": [{
+                        "startvalue": "700000",
+                        "valueOnRight": "1",
+                        "displayvalue": "Monthly Target"
+                    }]
+                }]
+            }
+        });
+        salesMap.render();
+        FusionCharts.options.export.useCanvas = true;
+    });</script>
+
+</html>
